@@ -1,4 +1,4 @@
 #include <stdio.h>
 
 // Définition de la fonction
-void sayHello(const char *name) { printf("Hello, %s!\n", name); }
+void add(const char *name) { printf("Hello, %s!\n", name); }
