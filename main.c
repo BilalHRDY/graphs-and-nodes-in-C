@@ -1,3 +1,4 @@
+#include "queue.h"
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -92,6 +93,7 @@ int initLinkedList(Adjacent *hashmap, Graph *graph, size_t hashmapSize) {
 }
 
 int main() {
+  sayHello("Alice");
   // Attention dans le cas où il a des sauts dans les index
   Adjacent hashmap[] = {{0, {1, -1}}, {1, {2, -1}}, {2, {0, -1}}};
 
