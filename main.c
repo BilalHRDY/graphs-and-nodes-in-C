@@ -1,22 +1,7 @@
-#include "queue.h"
+#include "node.h"
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
-
-typedef struct Node {
-  int name;
-  struct Node *children[2];
-} Node;
-
-typedef struct Graph {
-  struct Node *nodes[5];
-  int size;
-} Graph;
-
-typedef struct Adjacent {
-  int key;
-  int values[2];
-} Adjacent;
 
 int createNode(Node *rootNode, Adjacent *hashmap, size_t hashmapSize,
                Graph *graph) {
