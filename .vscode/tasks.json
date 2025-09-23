@@ -3,7 +3,7 @@
         {
             "label": "build all sources",
             "type": "shell",
-            "command": "clang *.c -o main && ./main",
+            "command": "clang *.c lib/node/node.c -o main && ./main",
             "options": {
                 "cwd": "${workspaceFolder}"
             },
