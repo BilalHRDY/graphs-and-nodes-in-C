@@ -4,10 +4,10 @@
 
 int main() {
   // Tester avec des sauts dans les indexes
-  Adjacent list[] = {{0, {1, 2, -1}},
-                     {1, {3, 4, -1}},
+  Adjacent list[] = {{0, {1, 2, 4}},
+                     {1, {2, 3, 4}},
                      {2, {3, -1}},
-                     {3, {-1, -1}},
+                     {3, {4, -1}},
                      {4, {-1, -1}}};
 
   // Adjacent list[] = {
@@ -23,31 +23,28 @@ int main() {
 
   size_t pos = 0;
 
-  for (size_t i = 0; i < graph->size; i++) {
-    printf("node %d\n", graph->nodes[i]->key);
-    pos += snprintf(buffer + pos, sizeof(buffer) - pos, "node : %d ",
-                    graph->nodes[i]->key);
+  // for (size_t i = 0; i < graph->size; i++) {
+  //   printf("node %d\n", graph->nodes[i]->key);
+  //   pos += snprintf(buffer + pos, sizeof(buffer) - pos, "node : %d ",
+  //                   graph->nodes[i]->key);
 
-    printf("childrenSize: %d\n", graph->nodes[i]->childrenSize);
+  //   printf("childrenSize: %d\n", graph->nodes[i]->childrenSize);
 
-    for (size_t j = 0; j < graph->nodes[i]->childrenSize; j++) {
+  //   for (size_t j = 0; j < graph->nodes[i]->childrenSize; j++) {
 
-      char *str = "children : ";
-      if (j > 0) {
-        str = "";
-      }
-      pos += snprintf(buffer + pos, sizeof(buffer) - pos, "%s %d ", str,
-                      graph->nodes[i]->children[j]->key);
-    }
-    pos += snprintf(buffer + pos, sizeof(buffer) - pos, "\n");
-  };
+  //     char *str = "children : ";
+  //     if (j > 0) {
+  //       str = "";
+  //     }
+  //     pos += snprintf(buffer + pos, sizeof(buffer) - pos, "%s %d ", str,
+  //                     graph->nodes[i]->children[j]->key);
+  //   }
+  //   pos += snprintf(buffer + pos, sizeof(buffer) - pos, "\n");
+  // };
 
-  printf("%s\n", buffer);
+  // printf("%s\n", buffer);
 
-  for (size_t i = 0; i < graph->size; i++) {
-    free(graph->nodes[i]); // libère chaque Node
-  }
-  free(graph); // libère le Graph
+  freeGraph(graph);
 }
 
 // Adjacent hashmap[] = {

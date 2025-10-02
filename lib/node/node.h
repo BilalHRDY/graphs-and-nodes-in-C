@@ -8,12 +8,12 @@ typedef struct Node {
   int key;
   int childrenSize;
   struct Node *children[];
-} Node; // size = 4 + 4 (padding) + 2 * 8 = 24 octets
+} Node;
 
 typedef struct Graph {
   size_t size;
   struct Node *nodes[];
-} Graph; // size = 8 * 5 + 4 = 44 octets
+} Graph;
 
 typedef struct Adjacent {
   int key;
@@ -25,5 +25,7 @@ typedef struct Queue Queue;
 void enqueue(Queue q, Node n);
 
 Graph *initGraph(Adjacent *list, size_t listSize);
+
+void freeGraph(Graph *graph);
 
 #endif
