@@ -5,77 +5,83 @@
 #include <string.h>
 
 typedef struct Children {
-  int children[2];
+  size_t size;
+  int values[];
 } Children;
 
-Children getValuesInListByKey(Adjacent *list, size_t listSize, int nodeKey) {
+Children *getValuesInListByKey(Adjacent *list, size_t listSize, int nodeKey) {
 
   for (size_t i = 0; i < listSize; i++) {
     if (nodeKey == list[i].key) {
-      Children children;
-      memcpy(children.children, list[i].values, sizeof(children.children));
+
+      int count = 0;
+      for (size_t j = 0; j < MAX_CHILDREN; j++) {
+        if (list[i].values[j] == -1) {
+          break;
+        }
+        count++;
+      }
+
+      Children *children = malloc(sizeof(Children) + count * sizeof(int));
+      children->size = count;
+      for (size_t j = 0; j < count; j++) {
+        children->values[j] = list[i].values[j];
+      }
+
       return children;
     }
   }
 
-  printf("Key not found in list!\n");
+  printf("Key : %d not found in list!\n", nodeKey);
   exit(0);
 };
 
 Node *searchNodeInGraph(Graph *graph, int key) {
-
-  // Itération sur le graph pour checker si le node existe déjà
   for (size_t i = 0; i < graph->size; i++) {
     if (graph->nodes[i]->key == key) {
-      printf("node key : %i has been found in graph\n", key);
       return graph->nodes[i];
     };
   };
   return NULL;
 };
 
-void createNode(Node *rootNode, Adjacent *list, size_t listSize, Graph *graph) {
+Node *createNode(int key, Adjacent *list, size_t listSize, Graph *graph) {
 
-  if (rootNode == NULL) {
-    rootNode = malloc(sizeof(Node));
-    rootNode->key = list[0].key;
-    graph->nodes[graph->size++] = rootNode;
+  Node *existing = searchNodeInGraph(graph, key);
+  if (existing != NULL)
+    return existing;
+
+  Children *childValues = getValuesInListByKey(list, listSize, key);
+
+  Node *node = malloc(sizeof(Node) + childValues->size * sizeof(Node *));
+  node->key = key;
+  node->childrenSize = 0;
+
+  graph->nodes[graph->size++] = node;
+
+  for (size_t i = 0; i < childValues->size; i++) {
+    int childKey = childValues->values[i];
+    Node *child = createNode(childKey, list, listSize, graph);
+    node->children[i] = child;
+    node->childrenSize++;
   }
 
-  Children childValues = getValuesInListByKey(list, listSize, rootNode->key);
-
-  // Itération sur les valeurs enfants pour les créer récursivement
-  for (size_t i = 0;
-       i < sizeof(childValues.children) / sizeof(childValues.children[0]);
-       i++) {
-    int childValue = childValues.children[i];
-    printf("For rootNode : %i , child value : %i \n", rootNode->key,
-           childValue);
-
-    if (childValue == -1) {
-      break;
-    };
-
-    rootNode->children[i] = searchNodeInGraph(graph, childValue);
-
-    if (rootNode->children[i] == NULL) {
-      printf("Create child node : %i\n", childValue);
-
-      Node *node = malloc(sizeof(Node));
-      node->key = childValue;
-      graph->nodes[graph->size++] = node;
-      rootNode->children[i] = node;
-      createNode(node, list, listSize, graph);
-    }
-  }
+  free(childValues);
+  return node;
 }
 
 Graph *initGraph(Adjacent *list, size_t listSize) {
 
-  Graph *graph = malloc(sizeof(Graph));
+  Graph *graph = malloc(sizeof(Graph) + (listSize * sizeof(Node *)));
   graph->size = 0;
-
-  createNode(NULL, list, listSize, graph);
+  createNode(list[0].key, list, listSize, graph);
 
   return graph;
+}
+
+void freeGraph(Graph *graph) {
+  for (size_t i = 0; i < graph->size; i++) {
+    free(graph->nodes[i]);
+  }
+  free(graph);
 }
