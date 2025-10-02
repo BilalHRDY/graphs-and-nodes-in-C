@@ -1,7 +1,7 @@
 {
     "tasks": [
         {
-            "label": "build all sources",
+            "label": "run all sources",
             "type": "shell",
             "command": "clang *.c lib/node/node.c -o main && ./main",
             "options": {
@@ -15,12 +15,13 @@
         {
             "type": "cppbuild",
             "label": "C/C++: clang générer le fichier actif",
-            "command": "/usr/bin/clang",
+            "command": "clang",
             "args": [
                 "-fcolor-diagnostics",
                 "-fansi-escape-codes",
                 "-g",
                 "*.c",
+                "lib/node/node.c",
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}"
             ],

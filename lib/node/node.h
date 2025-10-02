@@ -2,19 +2,22 @@
 #define UTILS_H
 #include <stddef.h>
 
+#define MAX_CHILDREN 3
+
 typedef struct Node {
   int key;
-  struct Node *children[2];
+  int childrenSize;
+  struct Node *children[];
 } Node; // size = 4 + 4 (padding) + 2 * 8 = 24 octets
 
 typedef struct Graph {
-  struct Node *nodes[5];
-  int size;
+  size_t size;
+  struct Node *nodes[];
 } Graph; // size = 8 * 5 + 4 = 44 octets
 
 typedef struct Adjacent {
   int key;
-  int values[2];
+  int values[MAX_CHILDREN];
 } Adjacent;
 
 typedef struct Queue Queue;
