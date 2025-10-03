@@ -1,5 +1,5 @@
-#ifndef UTILS_H
-#define UTILS_H
+#ifndef NODE_H
+#define NODE_H
 #include <stddef.h>
 
 #define MAX_CHILDREN 3
@@ -19,10 +19,6 @@ typedef struct Adjacent {
   int key;
   int values[MAX_CHILDREN];
 } Adjacent;
-
-typedef struct Queue Queue;
-
-void enqueue(Queue q, Node n);
 
 Graph *initGraph(Adjacent *list, size_t listSize);
 
