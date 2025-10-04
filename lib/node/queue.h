@@ -7,8 +7,8 @@
 
 typedef struct Queue {
   size_t maxSize;
-  size_t size;
-  size_t index;
+  size_t tail;
+  size_t head;
   struct Node *nodes[QUEUE_MAX_SIZE];
 } Queue;
 

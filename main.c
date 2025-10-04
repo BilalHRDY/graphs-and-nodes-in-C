@@ -21,17 +21,17 @@ int main() {
 
   Queue *q = malloc(sizeof(Queue) + sizeof(Node) * QUEUE_MAX_SIZE);
   q->maxSize = QUEUE_MAX_SIZE;
-  q->index = 0;
-  q->size = 0;
+  q->tail = 0;
+  q->head = 0;
 
-  // enqueue(q, graph->nodes[0]);
-  // enqueue(q, graph->nodes[1]);
-  // enqueue(q, graph->nodes[2]);
+  enqueue(q, graph->nodes[0]);
+  Node *n = dequeue(q);
+  enqueue(q, graph->nodes[1]);
+  Node *n2 = dequeue(q);
+  enqueue(q, graph->nodes[3]);
+  enqueue(q, graph->nodes[2]);
 
-  // Node *n = dequeue(q);
-  // Node *n2 = dequeue(q);
-  // Node *n3 = dequeue(q);
-  // enqueue(q, graph->nodes[3]);
+  Node *n3 = dequeue(q);
   Node *n4 = dequeue(q);
 
   // char buffer[256];
