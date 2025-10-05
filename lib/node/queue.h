@@ -3,16 +3,15 @@
 #include "node.h"
 #include <stddef.h>
 
-#define QUEUE_MAX_SIZE 5
+#define QUEUE_MAX_SIZE 2
 
 typedef struct Queue {
   size_t maxSize;
   size_t tail;
-  size_t head;
-  struct Node *nodes[QUEUE_MAX_SIZE];
+  struct Node *nodes[];
 } Queue;
 
-void enqueue(Queue *q, Node *n);
+Queue *enqueue(Queue *q, Node *n);
 Node *dequeue(Queue *q);
 
 #endif

@@ -67,6 +67,8 @@ Node *createNode(int key, Adjacent *list, size_t listSize, Graph *graph) {
   }
 
   free(childValues);
+  childValues = NULL;
+
   return node;
 }
 
@@ -84,4 +86,5 @@ void freeGraph(Graph *graph) {
     free(graph->nodes[i]);
   }
   free(graph);
+  graph = NULL;
 }
