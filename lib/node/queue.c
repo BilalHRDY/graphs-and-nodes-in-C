@@ -3,31 +3,36 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-Queue *enqueue(Queue *q, Node *n) {
-  if (q->tail == q->maxSize) {
-    q->maxSize *= 2;
-    q = realloc(q, sizeof(Queue) + q->maxSize * sizeof(Node));
-  }
-
-  q->nodes[q->tail++] = n;
+Queue *initQueue() {
+  Queue *q = malloc(sizeof(Queue));
+  q->head = NULL;
+  q->tail = NULL;
   return q;
 };
 
+void enqueue(Queue *q, Node *n) {
+  Item *item = malloc(sizeof(Item));
+  item->node = n;
+  item->next = NULL;
+  if (q->head == NULL) {
+    q->head = item;
+  } else {
+    q->tail->next = item;
+  }
+  q->tail = item;
+};
+
 Node *dequeue(Queue *q) {
-  if (q->tail == 0) {
+  if (q->head == NULL) {
     printf("The queue is empty!\n");
     exit(0);
   }
-  Node *first = q->nodes[0];
-  q->nodes[0] = NULL;
 
-  for (size_t i = 0; i < q->tail; i++) {
-    if (i == q->tail - 1) {
-      q->nodes[i] = NULL;
-      break;
-    }
-    q->nodes[i] = q->nodes[i + 1];
+  Node *head = q->head->node;
+
+  q->head = q->head->next;
+  if (q->head == NULL) {
+    q->tail = NULL;
   }
-  q->tail--;
-  return first;
+  return head;
 };

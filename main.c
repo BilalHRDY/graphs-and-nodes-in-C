@@ -19,21 +19,20 @@ int main() {
   Graph *graph = initGraph(list, sizeof(list) / sizeof(Adjacent));
   printf("\n");
 
-  Queue *q = malloc(sizeof(Queue) + sizeof(Node) * QUEUE_MAX_SIZE);
-  q->maxSize = QUEUE_MAX_SIZE;
-  q->tail = 0;
+  //   Queue *q = malloc(sizeof(Queue) + sizeof(Node) * QUEUE_MAX_SIZE);
+  Queue *q = initQueue();
 
-  q = enqueue(q, graph->nodes[0]);
+  enqueue(q, graph->nodes[0]);
   Node *n = dequeue(q);
-  q = enqueue(q, graph->nodes[1]);
+  enqueue(q, graph->nodes[1]);
   Node *n2 = dequeue(q);
-  q = enqueue(q, graph->nodes[3]);
-  q = enqueue(q, graph->nodes[2]);
+  enqueue(q, graph->nodes[3]);
+  enqueue(q, graph->nodes[2]);
 
   Node *n3 = dequeue(q);
   Node *n4 = dequeue(q);
 
-  q = enqueue(q, graph->nodes[0]);
+  enqueue(q, graph->nodes[0]);
 
   // char buffer[256];
 

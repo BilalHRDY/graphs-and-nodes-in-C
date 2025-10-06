@@ -5,13 +5,17 @@
 
 #define QUEUE_MAX_SIZE 2
 
+typedef struct Item {
+  struct Node *node;
+  struct Item *next;
+} Item;
 typedef struct Queue {
-  size_t maxSize;
-  size_t tail;
-  struct Node *nodes[];
+  Item *head;
+  Item *tail;
 } Queue;
 
-Queue *enqueue(Queue *q, Node *n);
+Queue *initQueue();
+void enqueue(Queue *q, Node *n);
 Node *dequeue(Queue *q);
 
 #endif
