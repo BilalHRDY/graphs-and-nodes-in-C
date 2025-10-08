@@ -3,6 +3,8 @@
         "*.dbclient-js": "javascript",
         "__locale": "c",
         "stddef.h": "c",
-        "node.h": "c"
+        "node.h": "c",
+        "queue.h": "c",
+        "stdio.h": "c"
     }
 }

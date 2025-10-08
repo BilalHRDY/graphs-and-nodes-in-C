@@ -1,5 +1,6 @@
 #include "queue.h"
 #include "node.h"
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -7,6 +8,7 @@ Queue *initQueue() {
   Queue *q = malloc(sizeof(Queue));
   q->head = NULL;
   q->tail = NULL;
+
   return q;
 };
 
@@ -23,7 +25,7 @@ void enqueue(Queue *q, Node *n) {
 };
 
 Node *dequeue(Queue *q) {
-  if (q->head == NULL) {
+  if (isEmpty(q)) {
     printf("The queue is empty!\n");
     exit(0);
   }
@@ -35,4 +37,11 @@ Node *dequeue(Queue *q) {
     q->tail = NULL;
   }
   return head;
+};
+
+bool isEmpty(Queue *q) {
+  if (q->head == NULL) {
+    return true;
+  }
+  return false;
 };

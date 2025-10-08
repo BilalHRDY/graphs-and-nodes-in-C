@@ -3,7 +3,7 @@
         {
             "label": "run all sources",
             "type": "shell",
-            "command": "clang *.c lib/node/node.c lib/node/queue.c -o main && ./main",
+            "command": "clang *.c lib/node/node.c lib/node/queue.c lib/algo/algo.c -o main && ./main",
             "options": {
                 "cwd": "${workspaceFolder}"
             },
@@ -21,7 +21,7 @@
                 "-fansi-escape-codes",
                 "-g",
                 "*.c",
-                "lib/node/node.c lib/node/queue.c",
+                "lib/node/node.c lib/node/queue.c lib/algo/algo.c",
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}"
             ],

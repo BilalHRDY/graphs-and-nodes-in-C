@@ -1,3 +1,4 @@
+#include "lib/algo/algo.h"
 #include "lib/node/node.h"
 #include "lib/node/queue.h"
 #include <stdio.h>
@@ -5,34 +6,41 @@
 
 int main() {
   // Tester avec des sauts dans les indexes
-  Adjacent list[] = {{0, {1, 2, 4}},
-                     {1, {2, 3, 4}},
-                     {2, {3, -1}},
-                     {3, {4, -1}},
-                     {4, {-1, -1}}};
-  // Adjacent list[] = {
-  //     {0, {1, 2, -1}},
-  //     {1, {2, -1, -1}},
-  //     {2, {-1, -1, -1}},
-  // };
+  Adjacent list1[] = {{0, {1, 2, 4}},
+                      {1, {2, 3, 4}},
+                      {2, {3, -1}},
+                      {3, {4, -1}},
+                      {4, {-1, -1}}};
 
-  Graph *graph = initGraph(list, sizeof(list) / sizeof(Adjacent));
-  printf("\n");
+  Adjacent list2[] = {
+      {0, {1, 2, -1}},
+      {1, {2, -1, -1}},
+      {2, {-1, -1, -1}},
+  };
 
-  //   Queue *q = malloc(sizeof(Queue) + sizeof(Node) * QUEUE_MAX_SIZE);
-  Queue *q = initQueue();
+  Adjacent list3[] = {
+      {0, {1, -1, -1}},
+      {1, {2, -1, -1}},
+      {2, {-1, -1, -1}},
+      {3, {-1, -1, -1}},
+  };
 
-  enqueue(q, graph->nodes[0]);
-  Node *n = dequeue(q);
-  enqueue(q, graph->nodes[1]);
-  Node *n2 = dequeue(q);
-  enqueue(q, graph->nodes[3]);
-  enqueue(q, graph->nodes[2]);
+  Graph *graph = initGraph(list3, sizeof(list3) / sizeof(Adjacent));
 
-  Node *n3 = dequeue(q);
-  Node *n4 = dequeue(q);
+  routeBetweenNodes(graph->nodes[0], graph->nodes[3]);
 
-  enqueue(q, graph->nodes[0]);
+  printf("end\n");
+  //   enqueue(q, graph->nodes[0]);
+  //   Node *n = dequeue(q);
+  //   enqueue(q, graph->nodes[1]);
+  //   Node *n2 = dequeue(q);
+  //   enqueue(q, graph->nodes[3]);
+  //   enqueue(q, graph->nodes[2]);
+
+  //   Node *n3 = dequeue(q);
+  //   Node *n4 = dequeue(q);
+
+  //   enqueue(q, graph->nodes[0]);
 
   // char buffer[256];
 
