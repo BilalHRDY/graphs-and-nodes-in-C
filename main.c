@@ -1,4 +1,5 @@
 #include "lib/node/node.h"
+#include "lib/node/queue.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -9,7 +10,6 @@ int main() {
                      {2, {3, -1}},
                      {3, {4, -1}},
                      {4, {-1, -1}}};
-
   // Adjacent list[] = {
   //     {0, {1, 2, -1}},
   //     {1, {2, -1, -1}},
@@ -19,9 +19,24 @@ int main() {
   Graph *graph = initGraph(list, sizeof(list) / sizeof(Adjacent));
   printf("\n");
 
-  char buffer[256];
+  //   Queue *q = malloc(sizeof(Queue) + sizeof(Node) * QUEUE_MAX_SIZE);
+  Queue *q = initQueue();
 
-  size_t pos = 0;
+  enqueue(q, graph->nodes[0]);
+  Node *n = dequeue(q);
+  enqueue(q, graph->nodes[1]);
+  Node *n2 = dequeue(q);
+  enqueue(q, graph->nodes[3]);
+  enqueue(q, graph->nodes[2]);
+
+  Node *n3 = dequeue(q);
+  Node *n4 = dequeue(q);
+
+  enqueue(q, graph->nodes[0]);
+
+  // char buffer[256];
+
+  // size_t pos = 0;
 
   // for (size_t i = 0; i < graph->size; i++) {
   //   printf("node %d\n", graph->nodes[i]->key);
